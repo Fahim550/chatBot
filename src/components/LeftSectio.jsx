@@ -67,15 +67,15 @@ export default function LeftSectio() {
           </div>
         ))}
       </div>
-      <div className="flex justify-between items-center py-0 px-5 h-2/12">
+      <div className="flex justify-items-center items-center py-0 px-5 h-2/12">
         <img
           src={nouserlogo}
-          className="rounded-2xl"
+          className="rounded-2xl "
           alt="ChatGPT"
           width={50}
           height={50}
         />
-        <p className="text-white ">fahim2015@gmail.com</p>
+        <p className="text-white mx-2">Guest</p>
       </div>
     </div>
   );

@@ -75,7 +75,6 @@ export default function RightSection() {
 
   // // node --version # Should be >= 18
 
-  // // npm install @google/generative-ai
 
   // // const {
   // //   GoogleGenerativeAI,
@@ -97,24 +96,7 @@ export default function RightSection() {
   //     maxOutputTokens: 2048,
   //   };
 
-  //   const safetySettings = [
-  //     {
-  //       category: HarmCategory.HARM_CATEGORY_HARASSMENT,
-  //       threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-  //     },
-  //     {
-  //       category: HarmCategory.HARM_CATEGORY_HATE_SPEECH,
-  //       threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-  //     },
-  //     {
-  //       category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
-  //       threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-  //     },
-  //     {
-  //       category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
-  //       threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-  //     },
-  //   ];
+
 
   //   const chat = model.startChat({
   //     generationConfig,
@@ -209,15 +191,7 @@ export default function RightSection() {
     SpeechRecognition.startListening();
     microphoneRef.current.classList.add(isSent);
     SpeechRecognition.lang = "en-US";
-    // SpeechRecognition.startListening({
-    //   continuous: true,
-    // });
-    // setMessage((prevMessages) => [...prevMessages, newMessage]);
-    // const newMessage = {
-    //   messages: transcript,
-    //   direction: "outgoing",
-    //   sender: "user",
-    // };
+  
     console.log("transcript", transcript);
     // await resetTranscript();
     try {
@@ -265,20 +239,15 @@ export default function RightSection() {
   };
 
   const handleSpeak = async () => {
-    // console.log("response", response);
-    // const speechSynthesis = window.speechSynthesis;
-    // const utterance = new SpeechSynthesisUtterance(response);
-    // if (isPaused) {
-    //   speechSynthesis.resume();
-    // }
-    // setIsPaused(false);
+  
     speechSynthesis.speak(utterance);
-    setIsPaused(true);
+    setIsPaused(false);
     // console.log("speak");
+    
   };
   const handleStop = () => {
     speechSynthesis.cancel();
-    setIsPaused(false);
+    setIsPaused(true);
   };
   const Ask = [
     {
@@ -353,7 +322,7 @@ export default function RightSection() {
                 <div className="flex gap-3 w-10/12 ">
                   {msg.role === "model" ? (
                     <h5 className="flex gap-3 w-4/12 mt-2 justify-center">
-                      {!isPaused ? (
+                      {isPaused ? (
                         <div onClick={handleSpeak}>
                           <svg
                             width="24"
@@ -361,7 +330,7 @@ export default function RightSection() {
                             viewBox="0 0 24 24"
                             fill="none"
                             xmlns="http://www.w3.org/2000/svg"
-                            className="icon-md"
+                            className="icon-md text-white"
                           >
                             <path
                               fillRule="evenodd"
@@ -382,8 +351,9 @@ export default function RightSection() {
                             xmlnsXlink="http://www.w3.org/1999/xlink"
                             viewBox="0 0 512.00 512.00"
                             xmlSpace="preserve"
+                            className="text-white"
                             fill="#ffffff"
-                            stroke="#000000"
+                            stroke="#"
                             strokeWidth="0.00512"
                           >
                             <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
@@ -414,7 +384,7 @@ export default function RightSection() {
                             viewBox="0 0 24 24"
                             fill="none"
                             xmlns="http://www.w3.org/2000/svg"
-                            className="icon-md"
+                            className="icon-md text-white"
                           >
                             <path
                               fillRule="evenodd"
