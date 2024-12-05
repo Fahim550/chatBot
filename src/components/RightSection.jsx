@@ -63,7 +63,7 @@ export default function RightSection() {
   const [response, setResponse] = useState();
   const [isPaused, setIsPaused] = useState(true);
   const [utterance, setUtterance] = useState(null);
-  const API_KEY = "AIzaSyCIRKPHj66r3k9PqEChRG12cHgkaNzQZpM";
+  const API_KEY = "AIzaSyAThH_hZ33Oy1g--v36RZ3rROd_jQ8ghJc";
   const {
     transcript,
     listening,
@@ -73,43 +73,6 @@ export default function RightSection() {
   const [isListening, setIsListening] = useState(false);
   const microphoneRef = useRef(null);
 
-  // // node --version # Should be >= 18
-
-
-  // // const {
-  // //   GoogleGenerativeAI,
-  // //   HarmCategory,
-  // //   HarmBlockThreshold,
-  // // } = require("@google/generative-ai");
-
-  // const MODEL_NAME = "gemini-1.0-pro";
-  // const API_KEY = "AIzaSyCIRKPHj66r3k9PqEChRG12cHgkaNzQZpM";
-
-  // async function runChat() {
-  //   const genAI = new GoogleGenerativeAI(API_KEY);
-  //   const model = genAI.getGenerativeModel({ model: MODEL_NAME });
-
-  //   const generationConfig = {
-  //     temperature: 0.9,
-  //     topK: 1,
-  //     topP: 1,
-  //     maxOutputTokens: 2048,
-  //   };
-
-
-
-  //   const chat = model.startChat({
-  //     generationConfig,
-  //     safetySettings,
-  //     history: [],
-  //   });
-
-  //   const result = await chat.sendMessage("YOUR_USER_INPUT");
-  //   const response = result.response;
-  //   console.log(response.text());
-  // }
-
-  // runChat();
   let url =
     `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=` +
     API_KEY;
@@ -139,8 +102,11 @@ export default function RightSection() {
     let resjson = await res.json();
     // console.log("resjson", resjson);
     setIsSent(true);
-    // console.log("responseMessage", resjson.candidates[0].content.parts[0].text);
-    let responseMessage = resjson.candidates[0].content.parts[0].text;
+    console.log(
+      "responseMessage",
+      resjson?.candidates[0]?.content?.parts[0]?.text
+    );
+    let responseMessage = resjson?.candidates[0]?.content?.parts[0]?.text;
 
     setResponse(responseMessage);
     let newAllMessages = [
@@ -191,7 +157,7 @@ export default function RightSection() {
     SpeechRecognition.startListening();
     microphoneRef.current.classList.add(isSent);
     SpeechRecognition.lang = "en-US";
-  
+
     console.log("transcript", transcript);
     // await resetTranscript();
     try {
@@ -239,11 +205,9 @@ export default function RightSection() {
   };
 
   const handleSpeak = async () => {
-  
     speechSynthesis.speak(utterance);
     setIsPaused(false);
     // console.log("speak");
-    
   };
   const handleStop = () => {
     speechSynthesis.cancel();
